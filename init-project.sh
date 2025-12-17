@@ -18,12 +18,29 @@ mkdir -p .claude/commands
 
 # 2. 创建软链接到全局命令
 echo "🔗 创建命令软链接..."
+
+# 需求分析和文档生成命令
+ln -sf ~/.claude-commands/req-analyze.md .claude/commands/req-analyze.md
 ln -sf ~/.claude-commands/prd.md .claude/commands/prd.md
+ln -sf ~/.claude-commands/update-prd.md .claude/commands/update-prd.md
+
+# 编码计划相关命令
 ln -sf ~/.claude-commands/create-plan.md .claude/commands/create-plan.md
+ln -sf ~/.claude-commands/update-plan.md .claude/commands/update-plan.md
+ln -sf ~/.claude-commands/code-by-plan.md .claude/commands/code-by-plan.md
+
+# 代码审查和 Bug 修复
 ln -sf ~/.claude-commands/review.md .claude/commands/review.md
-echo "   ✅ prd.md"
-echo "   ✅ create-plan.md"
-echo "   ✅ review.md"
+ln -sf ~/.claude-commands/bug-fix.md .claude/commands/bug-fix.md
+
+echo "   ✅ req-analyze.md     (需求分析)"
+echo "   ✅ prd.md             (生成 PRD)"
+echo "   ✅ update-prd.md      (更新 PRD)"
+echo "   ✅ create-plan.md     (生成编码计划)"
+echo "   ✅ update-plan.md     (更新编码计划)"
+echo "   ✅ code-by-plan.md    (按计划编码)"
+echo "   ✅ review.md          (代码审查)"
+echo "   ✅ bug-fix.md         (Bug 修复)"
 echo ""
 
 # 3. 检测项目技术栈
@@ -181,10 +198,20 @@ echo ""
 
 # 5. 创建 .ai-configs 目录结构
 echo "📂 创建 .ai-configs 目录结构..."
+
+# 获取当前年月
+CURRENT_YEAR=$(date +%Y)
+CURRENT_MONTH=$(date +%m)
+
+mkdir -p .ai-configs/analysis/$CURRENT_YEAR/$CURRENT_MONTH
 mkdir -p .ai-configs/prd
 mkdir -p .ai-configs/plan
-echo "   ✅ .ai-configs/prd/ (PRD 文档存储)"
-echo "   ✅ .ai-configs/plan/ (编码计划存储)"
+mkdir -p .ai-configs/examples
+
+echo "   ✅ .ai-configs/analysis/$CURRENT_YEAR/$CURRENT_MONTH/ (需求分析报告)"
+echo "   ✅ .ai-configs/prd/                  (PRD 文档存储)"
+echo "   ✅ .ai-configs/plan/                 (编码计划存储)"
+echo "   ✅ .ai-configs/examples/              (示例文档)"
 echo ""
 
 # 6. 更新 .gitignore
@@ -207,22 +234,36 @@ echo "✅ 初始化完成！"
 echo ""
 echo "📋 后续步骤："
 echo "   1. 编辑 .claude/project-context.md 填写项目信息"
-echo "   2. 使用命令："
-echo "      /prd [功能描述]          - 生成产品需求文档"
-echo "      /create-plan [功能描述]  - 生成编码计划"
-echo "      /review                  - 代码审查"
+echo "   2. 查看示例文档："
+echo "      .ai-configs/examples/README.md - 优化工作流程示例"
+echo "   3. 使用命令："
+echo "      /req-analyze [需求描述]      - 需求分析（推荐第一步）"
+echo "      /prd [功能描述]             - 生成产品需求文档"
+echo "      /update-prd                 - 更新 PRD 文档"
+echo "      /create-plan [功能描述]     - 生成编码计划"
+echo "      /update-plan                - 更新编码计划"
+echo "      /code-by-plan               - 按计划编码"
+echo "      /bug-fix [Bug 描述]         - Bug 修复"
+echo "      /review                     - 代码审查"
 echo ""
 echo "📁 目录结构："
 echo "   .claude/"
 echo "   ├── commands/              # 命令软链接（已添加到 .gitignore）"
-echo "   │   ├── prd.md -> ~/.claude-commands/prd.md"
-echo "   │   ├── create-plan.md -> ~/.claude-commands/create-plan.md"
-echo "   │   └── review.md -> ~/.claude-commands/review.md"
+echo "   │   ├── req-analyze.md"
+echo "   │   ├── prd.md"
+echo "   │   ├── update-prd.md"
+echo "   │   ├── create-plan.md"
+echo "   │   ├── update-plan.md"
+echo "   │   ├── code-by-plan.md"
+echo "   │   ├── bug-fix.md"
+echo "   │   └── review.md"
 echo "   └── project-context.md     # 项目配置（请编辑）"
 echo ""
 echo "   .ai-configs/"
+echo "   ├── analysis/              # 需求分析报告（按年/月组织）"
 echo "   ├── prd/                   # PRD 文档"
-echo "   └── plan/                  # 编码计划"
+echo "   ├── plan/                  # 编码计划"
+echo "   └── examples/              # 示例文档（包含工作流程说明）"
 echo ""
 echo "💡 提示："
 echo "   - project-context.md 建议提交到 git，团队共享"
