@@ -175,17 +175,17 @@ git show HEAD
 ### 🎯 三、影响范围分析（⚠️ 重点）
 
 #### 3.1 文件依赖分析
-使用 Grep 搜索，分析影响范围：
+使用 `rg` 搜索，分析影响范围：
 
 ```bash
 # 如果修改了公共组件
-grep -r "import.*CommonComponent" src/
+rg "import.*CommonComponent" src/
 
 # 如果修改了工具函数
-grep -r "import.*utils" src/
+rg "import.*utils" src/
 
 # 如果修改了 Store
-grep -r "useXXXStore" src/
+rg "useXXXStore" src/
 ```
 
 **需要回答的问题**：
@@ -427,7 +427,7 @@ grep -r "useXXXStore" src/
 
 1. **样式覆盖**：这是高频问题，必须仔细检查
 2. **版本差异**：根据 project-context.md 检查版本兼容性
-3. **影响范围**：使用 Grep 工具全面搜索，避免遗漏
+3. **影响范围**：使用 `rg` 全面搜索，避免遗漏
 
 ## 注意事项
 
