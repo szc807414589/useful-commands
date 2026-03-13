@@ -22,7 +22,11 @@
       "Bash(do ssh:*)",
       "Bash(for i in 1 2 3 4 5 6 7 8)",
       "Bash(ssh-keygen:*)",
-      "mcp__filesystem__directory_tree"
+      "mcp__filesystem__directory_tree",
+      "Bash(rm:*)",
+      "Bash(echo === $skill ===:*)",
+      "Bash(chmod +x:*)",
+      "Bash(ls -l ~/.claude/skills/server-ops-safe/scripts/*.sh ~/.claude/skills/server-deploy/scripts/*.sh)"
     ]
   }
 }
